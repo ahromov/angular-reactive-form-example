@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-examples';
+
+  myForm: FormGroup;
+
+  constructor() {
+    this.myForm = new FormGroup({
+      "userName": new FormControl("Tom", Validators.required),
+      "userEmail": new FormControl("", [
+        Validators.required,
+        Validators.email
+      ]),
+      "userPhone": new FormControl("", Validators.pattern("[0-9]{10}"))
+    });
+  }
+
+  submit() {
+    console.log(this.myForm);
+  }
+
 }
